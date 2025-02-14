@@ -1,5 +1,5 @@
 import sqlite3
-
+import functools
 import click
 from flask import Blueprint,current_app, g,request,session,redirect,url_for,render_template
 
@@ -80,3 +80,13 @@ def register():
 def logout():
     session.clear()
     return redirect(url_for('index'))
+
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for('auth.login'))
+
+        return view(**kwargs)
+
+    return wrapped_view
