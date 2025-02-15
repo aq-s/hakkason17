@@ -2,15 +2,15 @@ import sqlite3
 
 import click
 from flask import Blueprint,current_app, g,request,session,redirect,url_for,render_template
-from login import get_db,login_required
-from werkzeug.security import check_password_hash, generate_password_hash
+#login.pyからget_db関数をimportする
+from db import get_db
 
-bp_ing=Blueprint('ingredient', __name__, url_prefix='/ingredient')
+bp=Blueprint('ingredient', __name__, url_prefix='/ingredient')
 
 YAMINABE_CAPACITY = 5
 #材料をデータベースに登録する
-@bp_ing.route('/add', methods=['POST'])
-@login_required
+@bp.route('/add', methods=['POST'])
+#@login_required
 def add():
     db = get_db()
     error = None

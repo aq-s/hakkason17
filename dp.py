@@ -24,6 +24,7 @@ def close_db(e=None):
 def initiate_db_command():
     db=get_db()
     with current_app.open_resource('schema.sql') as f:
+        #print("hello")
         db.executescript(f.read().decode('utf8'))   
 #initiate_db_commandをappに登録する
 def init_app(app):
