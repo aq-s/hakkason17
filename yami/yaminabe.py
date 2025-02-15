@@ -1,4 +1,5 @@
 import sqlite3
+import functools
 
 from flask import Blueprint,current_app, g,request,session,redirect,url_for,render_template
 from login import get_db,login_required
@@ -22,7 +23,7 @@ def yaminabe_register():
                 (yaminabe_name,)
             )
             db.commit()
-            return redirect('/aa.html')
+            return redirect('/login')
 
     return render_template('/yaminabe/register.html', error=error)
 
@@ -46,3 +47,11 @@ def yaminabe_login():
 def yaminabe_logout():
     session.clear()
     return redirect('/aa.html')
+
+def yaminabe_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for('yaminabe.yaminabe_login'))
+        return view(**kwargs)
+    return wrapped_view
