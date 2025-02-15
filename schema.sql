@@ -1,17 +1,16 @@
-DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS ingredient;
-CREATE TABLE user (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  username TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL,
-);
+DROP TABLE IF EXISTS yaminabe;
 
+CREATE TABLE yaminabe (
+  yaminabe_id INT AUTO_INCREMENT PRIMARY KEY,
+  yaminabe_name TEXT PRIMARY KEY NOT NULL,
+  yaminabe_kansei INTEGER NOT NULL,
+);
 
 CREATE TABLE ingredient (
   id INT AUTO_INCREMENT PRIMARY KEY,
   ingredient_name TEXT NOT NULL,
-  user_id INT NOT NULL,
-  yaminabe_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user(id)
+  yaminabe_id INTEGER NOT NULL,
+  FOREIGN KEY (yaminabe_id) REFERENCES yaminabe(yaminabe_id)
 );
 
