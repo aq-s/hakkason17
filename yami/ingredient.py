@@ -3,7 +3,7 @@ import sqlite3
 import click
 from flask import Blueprint,current_app, g,request,session,redirect,url_for,render_template
 #login.pyからget_db関数をimportする
-#from login import get_db,login_required
+from db import get_db
 
 bp=Blueprint('ingredient', __name__, url_prefix='/ingredient')
 
