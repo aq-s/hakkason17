@@ -6,27 +6,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 bp_user =Blueprint('user', __name__, url_prefix='/user')
 
-
-@bp_user.route('/login', methods=['POST'])
-def login():
-    db = get_db()
-    error = None
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        cur = db.cursor()
-        cur.execute(
-            'SELECT * FROM user WHERE username = ? ', (username, )
-        )
-        user = cur.fetchone()
-        if user is None or not(check_password_hash(user['password'], password)):
-            error = 'Incorrect username or password.'
-        else :
-            session['user_id'] = user['id']
-            return redirect(url_for('index'))
-
-    return render_template('login.html', error=error)
-
+#registerする
 @bp_user.route('/register', methods=['POST'])
 def register():
     db = get_db()
@@ -51,11 +31,34 @@ def register():
 
     return render_template('register.html', error=error)
 
+#loginする
+@bp_user.route('/login', methods=['POST'])
+def login():
+    db = get_db()
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        cur = db.cursor()
+        cur.execute(
+            'SELECT * FROM user WHERE username = ? ', (username, )
+        )
+        user = cur.fetchone()
+        if user is None or not(check_password_hash(user['password'], password)):
+            error = 'Incorrect username or password.'
+        else :
+            session['user_id'] = user['id']
+            return redirect(url_for('index'))
+
+    return render_template('login.html', error=error)
+
+#logoutする
 @bp_user.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('index'))
 
+#ログインしているかどうかを確認する。していなければログインフォームに飛ぶ
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):

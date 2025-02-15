@@ -2,7 +2,7 @@ import sqlite3
 import click
 from flask import current_app, g
 
-
+#データベースをgの中に格納する
 def get_db():
     if 'db' not in g:
         g.db=sqlite3.connect(
@@ -13,18 +13,19 @@ def get_db():
 
     return g.db
 
+#データベースを閉じる
 def close_db(e=None):
     db = g.pop('db', None)
 
     if db is not None:
         db.close()
-
+#データベースを初期化する
 @click.command('initiate-db')
 def initiate_db_command():
     db=get_db()
     with current_app.open_resource('schema.sql') as f:
         db.executescript(f.read().decode('utf8'))   
-
+#initiate_db_commandをappに登録する
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(initiate_db_command)

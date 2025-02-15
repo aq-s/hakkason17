@@ -8,7 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 bp_ing=Blueprint('ingredient', __name__, url_prefix='/ingredient')
 
 YAMINABE_CAPACITY = 5
-
+#材料をデータベースに登録する
 @bp_ing.route('/add', methods=['POST'])
 @login_required
 def add():
