@@ -2,10 +2,10 @@ import sqlite3
 import functools
 
 from flask import Blueprint,current_app, g,request,session,redirect,url_for,render_template
-
+from yami.db import get_db
 bp=Blueprint('yaminabe', __name__, url_prefix='/yaminabe')
 
-@bp.route('/register', methods=['GET,POST'])
+@bp.route('/register', methods=['GET','POST'])
 def yaminabe_register():
     db = get_db()
     error = None
@@ -22,9 +22,9 @@ def yaminabe_register():
                 (yaminabe_name,)
             )
             db.commit()
-            return redirect('/login')
+            return render_template('/yaminabe/login.html',error=error)
 
-    return render_template('/yaminabe/register.html', error=error)
+    return render_template('yaminabe/register.html',error=error)
 
 @bp.route('/login', methods=['GET','POST'])
 def yaminabe_login():
@@ -38,8 +38,8 @@ def yaminabe_login():
         if yaminabe is None:
             error = 'Incorrect yaminabe name.'
         else :
-            session['yaminabe_id'] = yaminabe['id']
-            return redirect('/aa.html')
+            session['yaminabe_id'] = yaminabe['yaminabe_id']
+            return render_template('aa.html',error=error)
 
     return render_template('/yaminabe/login.html', error=error)
 

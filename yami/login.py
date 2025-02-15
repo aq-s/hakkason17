@@ -1,7 +1,7 @@
 import sqlite3
 import functools
 from flask import Blueprint,current_app, g,request,session,redirect,url_for,render_template
-from dp import *
+from yami.db import *
 from werkzeug.security import check_password_hash, generate_password_hash
 
 bp_user =Blueprint('user', __name__, url_prefix='/user')
