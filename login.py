@@ -1,36 +1,11 @@
 import sqlite3
 import functools
-import click
 from flask import Blueprint,current_app, g,request,session,redirect,url_for,render_template
-
+from dp import *
 from werkzeug.security import check_password_hash, generate_password_hash
 
 bp_user =Blueprint('user', __name__, url_prefix='/user')
-def get_db():
-    if 'db' not in g:
-        g.db=sqlite3.connect(
-            current_app.config['DATABASE'],
-            detect_types=sqlite3.PARSE_DECLTYPES
-        )
-        g.db.row_factory = sqlite3.Row
 
-    return g.db
-
-def close_db(e=None):
-    db = g.pop('db', None)
-
-    if db is not None:
-        db.close()
-
-@click.command('initiate-db')
-def initiate_db_command():
-    db=get_db()
-    with current_app.open_resource('schema.sql') as f:
-        db.executescript(f.read().decode('utf8'))   
-
-def init_app(app):
-    app.teardown_appcontext(close_db)
-    app.cli.add_command(initiate_db_command)
 
 @bp_user.route('/login', methods=['POST'])
 def login():
