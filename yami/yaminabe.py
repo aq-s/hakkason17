@@ -2,7 +2,6 @@ import sqlite3
 import functools
 
 from flask import Blueprint,current_app, g,request,session,redirect,url_for,render_template
-from login import get_db,login_required
 
 bp=Blueprint('yaminabe', __name__, url_prefix='/yaminabe')
 

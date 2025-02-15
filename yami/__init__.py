@@ -12,10 +12,6 @@ def create_app():
     from . import db
     db.init_app(app)
 
-    from . import yaminabe
-    app.register_blueprint(yaminabe.bp)
 
-    from . import ingredient
-    app.register_blueprint(ingredient.bp)
 
     return app
