@@ -5,18 +5,37 @@ from google import genai
 from google.genai import types
 from PIL import Image
 from io import BytesIO
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
-ingredients = ["ばなな", "いちご", "カレールー", "唐辛子", "USB"]
+# タグを受け取るエンドポイント
+@app.route('/receive_tags/', methods=['POST'])
+def receive_tags():
+    try:
+        # フロントエンドからのデータを取得
+        data = request.json
+        tags = data.get("tags")
 
-#APIキーの設定
-client = genai.Client(api_key="GEMINI_API_KEY")
+        # データをリスト型に変換
+        tags_list = list(tags)  # setやdict_keysなどもリスト化可能
+        ingredients = tags_list
+        
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+        
+        
+    #APIキーの設定
+    api_key = os.getenv('API_KEY') 
+    client = genai.Client(api_key=api_key)
 
 
-# 食材を英語に変換
-def translate_ingredients(ingredients):
-    response = client.models.translate_text(
+        # 食材を英語に変換
+    def translate_ingredients(ingredients):
+        response = client.models.translate_text(
         model='translate-text-1.0',
         text=ingredients,
         source='ja',
@@ -24,8 +43,9 @@ def translate_ingredients(ingredients):
     )
 
 
-# 質問内容　後で食材のところは変数に変更
-response = client.models.generate_images(
+
+    # 質問内容　後で食材のところは変数に変更
+    response = client.models.generate_images(
     model='imagen-3.0-generate-002',
     prompt="""Please make a image of a black pot with {ingredients}.""",
     config=types.GenerateImagesConfig(
@@ -33,9 +53,9 @@ response = client.models.generate_images(
     )
 )
 
-for generated_image in response.generated_images:
-  image = Image.open(BytesIO(generated_image.image.image_bytes))
-  image.show()
+    for generated_image in response.generated_images:
+        image = Image.open(BytesIO(generated_image.image.image_bytes))
+        image.show()
 
 # データベースに接続する関数
 def get_db_connection():
