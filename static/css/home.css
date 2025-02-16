@@ -1,0 +1,135 @@
+/* 全体のリセット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: rgb(252, 238, 214);    
+}
+
+/* ヘッダー */
+.header-bar {
+    width: 100%;
+    height: 80px;
+    background-color: orange;
+}
+
+/* メインレイアウト */
+.container {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 20px;
+}
+
+/* 左側の入力エリア */
+.left-section {
+    position: fixed; /* 画面下部に固定 */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgb(197, 255, 121); /* 背景色を設定 */
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* 上に影をつけて区別 */
+}
+
+input {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #000000;
+    background-color: rgb(255, 255, 255);
+}
+
+button {
+    padding: 10px 20px;
+    background-color: rgb(255, 166, 0);
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #793c00;
+}
+
+/* 中央の鍋画像 */
+.center-section {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.nabe-image {
+    width: 400px;
+}
+
+/* 右側の表示エリア */
+.right-section {
+    width: 250px;
+    background-color: rgb(204, 204, 204);
+    padding: 10px;
+    
+}
+
+.newItem{
+    background-color: rgb(206, 206, 206);
+    border: 2px solid #000000;
+}
+
+.deleteBtn{
+    left: 90;
+}
+
+#displayArea {
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid #000000;
+    background-color: rgb(206, 206, 206);
+    justify-content: space-between; /* 文字と削除ボタンを左右に配置 */
+    align-items: center;     /* 垂直方向に中央揃え */
+    
+}
+
+h2{
+    background-color: rgb(206, 206, 206);
+}
+
+#displayArea div {
+    display: flex;          /* 横並びにする */
+    justify-content: space-between; /* 文字と削除ボタンを左右に配置 */
+    align-items: center;     /* 垂直方向に中央揃え */
+    padding: 5px;
+    border: 1px solid #000;
+    background-color: rgb(255, 179, 179);
+}
+
+.delete-btn {
+    color: rgb(255, 0, 0);
+    cursor: pointer;
+    margin-left: auto; /* 自動的に右端に寄せる */
+    padding: 5px;
+    background-color: rgb(255, 179, 179);
+}
+
+/* ボタンのスタイル */
+.bottom-button {
+    text-align: center; /* 中央配置 */
+    margin-top: 20px;   /* 鍋の下に余白をつける */
+}
+
+#nextPageButton {
+    padding: 20px 60px;
+    background-color: #ff7f00;
+    font-size: 30px; 
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#nextPageButton:hover {
+    background-color: #793c00;
+}
