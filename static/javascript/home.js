@@ -52,5 +52,5 @@ document.getElementById('submitButton').addEventListener('click', function () {
 });
 
 document.getElementById('nextPageButton').addEventListener('click', function () {
-    window.location.href = "./next.html"; // 移動先のページ
+    window.location.href = "/next"; // 移動先のページ
 });

@@ -9,6 +9,9 @@ def main_page():
 @app.route("/home", methods=["GET","POST"])
 def home_page():
     return render_template("home.html")
+@app.route("/next", methods=["GET","POST"])
+def next_page():
+    return render_template("next.html")
 
 ## 実行
 if __name__ == "__main__":
