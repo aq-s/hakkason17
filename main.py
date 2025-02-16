@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 from flask import Flask, render_template, request, jsonify
 import json
 import sqlite3
@@ -79,4 +76,3 @@ def add_BlackFoods():
 
     conn.commit()
     conn.close()
->>>>>>> post
