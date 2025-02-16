@@ -1,8 +1,41 @@
 from flask import Flask, render_template, request, jsonify
 import json
 import sqlite3
+from google import genai
+from google.genai import types
+from PIL import Image
+from io import BytesIO
 
 app = Flask(__name__)
+
+ingredients = ["ばなな", "いちご", "カレールー", "唐辛子", "USB"]
+
+#APIキーの設定
+client = genai.Client(api_key="GEMINI_API_KEY")
+
+
+# 食材を英語に変換
+def translate_ingredients(ingredients):
+    response = client.models.translate_text(
+        model='translate-text-1.0',
+        text=ingredients,
+        source='ja',
+        target='en'
+    )
+
+
+# 質問内容　後で食材のところは変数に変更
+response = client.models.generate_images(
+    model='imagen-3.0-generate-002',
+    prompt="""Please make a image of a black pot with {ingredients}.""",
+    config=types.GenerateImagesConfig(
+        number_of_images= 1,
+    )
+)
+
+for generated_image in response.generated_images:
+  image = Image.open(BytesIO(generated_image.image.image_bytes))
+  image.show()
 
 # データベースに接続する関数
 def get_db_connection():
@@ -21,13 +54,12 @@ def send_BlackFoods():
 
 #登録
 def add_BlackFoods():
-    
     food_data = request.form #ここはフロント班次第で変更
     photo = photo #ここはgeminiの接続ごとに変える
     
     # 各データの取得(foods_idは自動採番)
-    user_id = user_id
-    ingredients = food_data['ingredients']
+    user_id = 1
+    ingredients = "ばなな、いちご、カレールー、唐辛子"
     photo = photo
     
     # 画像をバイナリデータに変換
@@ -44,6 +76,3 @@ def add_BlackFoods():
 
     conn.commit()
     conn.close()
-    
-    return jsonify({"message": "登録されました！"})
-    
