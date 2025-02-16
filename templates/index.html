@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ユーザー名入力</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 <body>
     <header class="header">
@@ -17,6 +17,6 @@
         <button id="submitButton">決定</button>
     </main>
 
-    <script src="index.js"></script>
+    <script src="{{ url_for('static', filename='javascript/index.js') }}"></script>
 </body>
 </html>

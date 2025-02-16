@@ -38,9 +38,9 @@ document.getElementById('submitButton').addEventListener('click', function () {
             const nabeImage = document.getElementById('nabeImage');
 
             if (displayArea.children.length > 0) {
-                nabeImage.src = "../image/babehatena.png"; // 食材がある場合
+                nabeImage.src = "../static/image/babehatena.png"; // 食材がある場合
             } else {
-                nabeImage.src = "../image/nabe.png"; // 食材がない場合
+                nabeImage.src = "../static/image/nabe.png"; // 食材がない場合
             }
         }
 
@@ -52,5 +52,5 @@ document.getElementById('submitButton').addEventListener('click', function () {
 });
 
 document.getElementById('nextPageButton').addEventListener('click', function () {
-    window.location.href = "../last/next.html"; // 移動先のページ
+    window.location.href = "./next.html"; // 移動先のページ
 });

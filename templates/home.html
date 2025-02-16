@@ -32,7 +32,7 @@
         </div>
     </main>
 
-    <script src="home.js"></script>
+    <script src="{{ url_for('static', filename='javascript/home.js') }}"></script>
     <script>
         // ローカルストレージからユーザー名を取得して表示
         const userName = localStorage.getItem("userName") || "ゲスト";
