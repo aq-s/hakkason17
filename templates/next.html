@@ -4,9 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>調理</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/next.css') }}">
 </head>
 <body>
-    <h1>これは次のページです</h1>
-    <a href="../home/home.html">戻る</a>
+    <header class="header">
+        <h1>料理ができました</h1>
+    </header>
+    
+    <main>
+        <div class="container">
+
+            
+        </div>
+        <a class="fixed-bottom" href="/home">戻る</a>
+        <a class="fix-bottom" href="https://twitter.com/share?url=https://example.com&text=このサイトをチェック！"
+        target="_blank" rel="noopener noreferrer">
+        Twitterでシェア
+        </a>
+    </main>
+
+    <script src="{{ url_for('static', filename='javascript/next.js') }}"></script>
 </body>
 </html>

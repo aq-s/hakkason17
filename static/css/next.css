@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Arial", sans-serif;
+    text-align: center;
+    background-color: rgb(255, 226, 172);
+}
+
+/* ヘッダー */
+.header {
+    background-color: #aef;
+    padding: 20px;
+    font-size: 24px;
+    color: rgb(0, 0, 0);
+}
+
+h1 {
+    background-color: #aef;
+}
+
+.fixed-bottom {
+    position: fixed;  /* 画面に固定 */
+    bottom: 10px;     /* 画面の下から10px */
+    left: 50%;        /* 水平方向の中央 */
+    transform: translateX(-50%); /* 中央揃え */
+    padding: 15px 30px;
+    background-color: orange;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.fix-bottom {
+    position: fixed;  /* 画面に固定 */
+    bottom: 80px;     /* 画面の下から10px */
+    left: 50%;        /* 水平方向の中央 */
+    transform: translateX(-50%); /* 中央揃え */
+    padding: 15px 30px;
+    background-color: orange;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
